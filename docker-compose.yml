@@ -1,0 +1,10 @@
+services:
+  mundinet:
+    container_name: mundinet
+    restart: always
+    build:
+      context: .
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html
