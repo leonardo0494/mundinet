@@ -1,3 +1,42 @@
+// Animação topbar
+
+const topBar = document.querySelector(".topbar");
+
+document.addEventListener('scroll', function () {
+    if (window.scrollY > 50) {
+        topBar.classList.add('topbar-fix');
+    } else {
+        topBar.classList.remove('topbar-fix');
+    }
+});
+
+// Construção do slide de planos
+
+const swiperPlanosStreaming = new Swiper('.swiper-planos-streaming', {
+    loop: true,
+    slidesPerView: 4,
+
+    // Navigation arrows
+    navigation: {
+        nextEl: '.next-planos-internet-streaming',
+        prevEl: '.prev-planos-internet-streaming',
+    },
+
+});
+
+const swiperPlanos = new Swiper('.swiper-planos', {
+    loop: true,
+    slidesPerView: 4,
+
+    // Navigation arrows
+    navigation: {
+        nextEl: '.next-planos-internet',
+        prevEl: '.prev-planos-internet',
+    },
+
+});
+let ibiapinaSlideIndex = -1;
+
 // Dropdown menu cidades 
 
 let selectCidades = document.querySelector('.cities-select'),
@@ -20,6 +59,38 @@ inputOpcoes.forEach((input) => {
             valorSelecionado.textContent = valor;
             cidadeSelecionada = valor;
             regiaoPlanos.textContent = `* Planos para a região de ${valor}`;
+        }
+
+        if (valor == "Ibiapina") {
+            if (ibiapinaSlideIndex === -1) {
+              swiperPlanos.appendSlide(`<div class="plano swiper-slide" data-slide="ibiapina">
+                <h2>50<span>MB</span></h2>
+                <ul>
+                  <li>Até 50 Mbps de Download</li>
+                  <li>Até 25 Mbps de Upload</li>
+                  <li>Taxa de Instalação Grátis</li>
+                  <li>Internet 100% Fibra Óptica</li>
+                </ul>
+                <div class="preco">
+                  <h4>R$ <span>55,00</span>/mês</h4>
+                </div>
+                <a href="#">Contrate agora</a>
+              </div>`);
+      
+              ibiapinaSlideIndex = swiperPlanos.slides.length - 1;
+            }
+            swiperPlanos.slideTo(swiperPlanos.params.initialSlide, 0);
+            swiperPlanos.update();
+            // Reseta o estado do slide ao adicionar um slide novo
+            swiperPlanos.slideToLoop(0); 
+        } else {
+            if (ibiapinaSlideIndex !== -1) {
+                swiperPlanos.removeSlide(ibiapinaSlideIndex);
+                swiperPlanos.update();
+                 // Reseta o estado do slide ao remover um slide
+                swiperPlanos.slideToLoop(0);
+                ibiapinaSlideIndex = -1;
+            }
         }
 
         selectCidades.classList.remove("aberto");
@@ -53,6 +124,92 @@ tipoInternetStreaming.addEventListener('click', () => {
     tipoInternet.classList.remove("ativo");
     tipoInternetStreaming.classList.add("ativo");
 });
+
+
+// Construção do mapa dinamico
+
+const map = L.map('map')
+    .setView([-4.045144101266519, -40.86501587763489], 16);
+
+const lojas = {
+    "SaoBenedito": [
+        { name: "São Benedito - Centro", lat: -4.045144101266519, lng: -40.86501587763489 },
+        { name: "São Benedito - Inhucu", lat: -4.112037971549726, lng: -40.87060792962749 }
+    ],
+    "Carnaubal" : [
+        { name: "Carnaubal - Centro", lat: -4.165039387316344, lng: -40.94250187565347 },
+        { name: "Carnaubal - Faveira", lat: -4.059554785283042, lng: -40.965857327094696 }
+    ],
+    "Ubajara" : [
+        { name: "Ubajara - Centro", lat: -3.852629504337531, lng: -40.92058060264129 },
+        { name: "Ubajara - Distrito Jaburuna", lat: -3.8902581758467383, lng: -40.97335143379739 }
+    ],
+    "Ibiapina" : [
+        { name: "Ibiapina - Centro", lat: -3.915814131663868, lng: -40.88954540264118 },
+        { name: "Ibiapina - Distrito Alto Lindo", lat: -3.9825308546660314, lng: -40.94309815002901 }
+    ],
+    "GuaracibaDoNorte" : [
+        { name: "Guaraciaba do Norte", lat: -4.172425599063241, lng: -40.877936828625195 }
+    ]
+};
+
+const customIcon = L.icon({
+    iconUrl: 'assets/Logo@2x.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32]
+});
+
+// Camada do OpenStreetMap
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+// Adicionando um marcador de exemplo
+Object.keys(lojas).forEach(cidade => {
+    lojas[cidade].forEach(loja =>
+        L.marker([loja.lat, loja.lng], { icon: customIcon }).addTo(map)
+            .bindPopup(`<b>${loja.name}</b>`)
+    )
+});
+
+const startMarker = L.marker([-4.045144101266519, -40.86501587763489], { icon: customIcon })
+    .addTo(map)
+    .bindTooltip('<b>Bem-vindo a São Benedito!</b>');
+
+startMarker.openTooltip();
+
+let currentMarkers = [];
+
+function showLocations(location) {
+    
+    currentMarkers.forEach(marker => map.removeLayer(marker));
+    currentMarkers = [];
+    startMarker.closeTooltip();
+
+    const bounds = [];
+    lojas[location].forEach(loja => {
+        
+        const marker = L.marker([loja.lat, loja.lng], { icon: customIcon })
+            .addTo(map)
+            .bindTooltip(`<b>${loja.name}</b>`, { permanent: true, direction: 'top' });
+
+        
+        marker.on('click', function () {
+            if (marker.isTooltipOpen()) {
+                marker.closeTooltip();
+            } else {
+                marker.openTooltip();
+            }
+        });
+
+        currentMarkers.push(marker);
+        bounds.push([loja.lat, loja.lng]);
+    });
+
+    if (bounds.length > 0) {
+        map.fitBounds(bounds);
+    }
+}
+
 
 cityMarkers.forEach(marker => {
     marker.addEventListener('click', function (){
