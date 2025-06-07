@@ -22,16 +22,11 @@ ul {
     list-style: none;
 }
 
-img {
-    max-width: 100%;
-    height: auto;
-}
-
 :root{
     --black: #1b1b1b;
     --white: #F8F8F8;
     --light-white: #EAEAEA;
-    --red: #A60C30;
+    --red: #e21243;
     --red-hover: #7b0823;
     --dark-blue: #0A1284;
     --dark-blue-hover: #1924b9;
@@ -283,44 +278,119 @@ img {
 
 .header-banners {
     background-color: var(--dark-blue);
-    padding: 4.5rem 0;
+    padding: 2.5rem 0;
 }
 
-.banner {
+.banner-1 {
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
+    gap: 4rem;
     align-items: center;
+    color: var(--white);
 }
 
-.banner > img {
-    height: 350px;
+.banner-1 > .imagem {
+    width: 450px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+    box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-.banner:nth-child(1) .conteudo{
+.banner-1 .imagem > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.banner-1 .conteudo {
     display: flex;
     flex-direction: column;
     align-items: start;
     gap: 2rem;
-    color: white;
 }
 
-.banner:nth-child(1) .conteudo h1{
-    font-size: 4rem;
-    font-weight: bold;
+.banner-1 .conteudo h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
 }
 
-.banner:nth-child(1) .conteudo img{
-    height: 35px;
+.banner-1 .conteudo .fibra {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 1rem;
+    border: 4px solid var(--red);
+    border-radius: 35px;
+    padding: .5rem 1.5rem;
 }
 
-.banner:nth-child(1) .conteudo a {
-    padding: .5rem 1rem;
-    border-radius: 1rem;
+.banner-1 .conteudo .fibra .velocidade {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.1;
+}
+
+.banner-1 .conteudo .fibra .velocidade{
+    font-size: 3.2rem;
+    font-weight: 900;
+}
+
+.banner-1 .conteudo .fibra .velocidade span{
+    font-size: 1.9rem;
+}
+
+.banner-1 .conteudo .fibra .separador {
+    width: 3px;
+    height: 80px;
     background-color: var(--red);
 }
 
-.banner:nth-child(1) .conteudo a:hover{
-    background-color: var(--red-hover);
+.banner-1 .conteudo .fibra .preco{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.banner-1 .conteudo .fibra .preco .br,
+.banner-1 .conteudo .fibra .preco .centavos {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.9rem;
+    line-height: 1.1;
+    font-weight: 800;
+}
+
+.banner-1 .conteudo .fibra .preco .br span,
+.banner-1 .conteudo .fibra .preco .centavos span {
+    font-size: .8rem;
+    font-weight: 300;
+}
+
+.banner-1 .conteudo .fibra .preco .valor {
+    font-size: 3rem;
+    font-weight: 900;
+}
+
+.banner-1 .conteudo .beneficios {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.banner-1 .conteudo .beneficios span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.banner-1 .conteudo .beneficios span > i{
+    font-size: .6rem;
+    border: 2px solid var(--red);
+    border-radius: 50%;
+    padding: .2rem;
 }
 
 .filtro-planos {
