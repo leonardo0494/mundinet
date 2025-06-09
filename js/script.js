@@ -10,7 +10,14 @@ document.addEventListener('scroll', function () {
     }
 });
 
-// Construção do slide de planos
+// Construção dos slides do site
+
+const swiperHeader = new Swiper('.swiper-banners', {
+    loop: true,
+    slidesPerView: 1,
+    autoplay: true,
+    pauseOnMouseEnter: true
+});
 
 const swiperPlanosStreaming = new Swiper('.swiper-planos-streaming', {
     loop: true,
