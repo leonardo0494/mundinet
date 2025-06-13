@@ -15,25 +15,27 @@ document.addEventListener('scroll', function () {
 const swiperHeader = new Swiper('.swiper-banners', {
     loop: true,
     slidesPerView: 1,
-    autoplay: true,
+    autoplay: false,
     pauseOnMouseEnter: true
-});
-
-const swiperPlanosStreaming = new Swiper('.swiper-planos-streaming', {
-    loop: true,
-    slidesPerView: 4,
-
-    // Navigation arrows
-    navigation: {
-        nextEl: '.next-planos-internet-streaming',
-        prevEl: '.prev-planos-internet-streaming',
-    },
-
 });
 
 const swiperPlanos = new Swiper('.swiper-planos', {
     loop: true,
-    slidesPerView: 4,
+
+    breakpoints: {
+        1280: {
+            slidesPerView: 4
+        },
+        1024: {
+            slidesPerView: 3
+        },
+        960: {
+            slidesPerView: 3
+        },
+        480: {
+            slidesPerView: 1
+        }
+    },
 
     // Navigation arrows
     navigation: {
@@ -42,7 +44,48 @@ const swiperPlanos = new Swiper('.swiper-planos', {
     },
 
 });
+
+const swiperPlanosStreaming = new Swiper('.swiper-planos-streaming', {
+    loop: true,
+    slidesPerView: 4,
+
+    breakpoints: {
+        1280: {
+            slidesPerView: 4
+        },
+        1024: {
+            slidesPerView: 3
+        },
+        960: {
+            slidesPerView: 3
+        },
+        480: {
+            slidesPerView: 1
+        },
+        320: {
+            slidesPerView: 1
+        }
+    },
+
+    // Navigation arrows
+    navigation: {
+        nextEl: '.next-planos-internet-streaming',
+        prevEl: '.prev-planos-internet-streaming',
+    },
+
+});
 let ibiapinaSlideIndex = -1;
+
+// links de ação do APP 
+
+const acaoApp = document.querySelectorAll('.acao');
+const userAgent = navigator.userAgent || window.opera;
+
+const linkApp = 
+
+acaoApp.forEach(acao => {
+    acao.href = ""
+})
 
 // Dropdown menu cidades 
 
