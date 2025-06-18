@@ -21,6 +21,7 @@ const swiperHeader = new Swiper('.swiper-banners', {
 
 const swiperPlanos = new Swiper('.swiper-planos', {
     loop: true,
+    slidesPerView: 4,
 
     breakpoints: {
         1280: {
@@ -33,7 +34,12 @@ const swiperPlanos = new Swiper('.swiper-planos', {
             slidesPerView: 3
         },
         480: {
-            slidesPerView: 1
+            slidesPerView: 1,
+            initialSlide: 1
+        },
+        320: {
+            slidesPerView: 1,
+            initialSlide: 1
         }
     },
 
@@ -60,10 +66,12 @@ const swiperPlanosStreaming = new Swiper('.swiper-planos-streaming', {
             slidesPerView: 3
         },
         480: {
-            slidesPerView: 1
+            slidesPerView: 1,
+            initialSlide: 1
         },
         320: {
-            slidesPerView: 1
+            slidesPerView: 1,
+            initialSlide: 1
         }
     },
 
@@ -75,6 +83,20 @@ const swiperPlanosStreaming = new Swiper('.swiper-planos-streaming', {
 
 });
 let ibiapinaSlideIndex = -1;
+
+// Acao menu mobile 
+
+const openMenuMobile = document.querySelector("#open-menu-mobile"),
+    closeMenuMobile = document.querySelector("#close-mobile-menu"),
+    menuMobile = document.querySelector("#header-menu-mobile");
+
+openMenuMobile.addEventListener('click', function () {
+    menuMobile.classList.remove('closed');
+});
+
+closeMenuMobile.addEventListener('click', function () {
+    menuMobile.classList.add('closed');
+});
 
 // links de ação do APP 
 
