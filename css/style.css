@@ -13,6 +13,7 @@ body{
     line-height: 1.5;
 }
 
+
 a {
     text-decoration: none;
     color: inherit;
@@ -1077,6 +1078,102 @@ footer .container span.copyright {
     display: none;
 }
 
+.faq .container h2{
+    font-size: 2rem;
+    padding: 1.5rem 0 0 0;
+}
+
+.cards-faq{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding: 1rem 1rem 1rem 0;
+    gap: 20px
+}
+
+.card {
+    width: auto;
+    border: 1px solid rgba(0 ,0, 0, 0.2);
+    border-radius: 8px;
+    padding: 0 1rem .4rem 1rem;
+}
+
+.card-title{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(0 ,0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.card-title i {
+    color: var(--dark-blue);
+}
+
+details {
+    font-size: .9rem;
+    padding: .8rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+details:last-child{
+    border: none;
+}
+
+details[open] summary{
+    margin-bottom: 10px;
+}
+
+details ul {
+    list-style: disc;
+    padding: 0 1.5rem;
+}
+
+details p {
+    text-align: justify;
+    line-height: 1.5;
+}
+
+details a {
+    color: var(--dark-blue);
+    font-weight: 600;
+}
+
+summary{
+    font-size: .925rem;
+    font-weight: 500;
+    position: relative;
+    cursor: pointer;
+}
+
+summary::marker {
+    display: none; 
+    list-style: none;
+}
+
+summary {
+    list-style: none;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary::after {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f078";
+    position: absolute;
+    right: 0;
+}
+
+details[open] summary::after {
+    content: "\f077";
+}
+
+
 @media (max-width: 1024px) {
     .container {
         max-width: 960px;
@@ -1279,6 +1376,15 @@ footer .container span.copyright {
         font-size: 1rem;
     }
 
+    .cities {
+        top: 40px;
+        z-index: 1000;
+    }
+
+    .top-header {
+        padding: .7rem 0;
+    }
+
     .header-menu,
     .top-header-menu {
         display: none;
@@ -1287,14 +1393,15 @@ footer .container span.copyright {
     #header-menu-mobile{
         display: flex;
         flex-direction: column;
-        position: absolute;
+        position: fixed;
         width: 100vw;
         height: 100dvh;
         top: 0;
         background-color: var(--dark-blue);
         color: var(--white);
         padding: 1rem;
-        z-index: 1000;
+        z-index: 5000;
+        overflow: auto;
     }
 
     #header-menu-mobile .close{
@@ -1521,13 +1628,6 @@ footer .container span.copyright {
         gap: 20px;
     }
 
-    .planos-internet>.swiper-slide {
-        width: 100% !important;
-        /* Ajuste o valor para o tamanho que quiser */
-        max-width: unset;
-        /* Opcional para limitar */  
-    }
-
     .swiper-button-next {
         display: none;
     }
@@ -1545,12 +1645,13 @@ footer .container span.copyright {
         font-size: 1rem;
     }
 
-    .download-app .container>img {
-        display: none;
+    .cards-faq {
+        grid-template-columns: 100%;
+        padding: 1rem .4rem 1rem 0;
     }
 
-    .conteudo-app {
-        align-items: start;
+    .download-app .container>img {
+        display: none;
     }
 
     .conteudo-app h2 {
@@ -1564,14 +1665,14 @@ footer .container span.copyright {
     }
 
     .conteudo-app .acoes {
-        justify-content: start;
-        gap: 10px 20px;
-        flex-wrap: wrap;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
     }
 
     .conteudo-app .acoes .acao {
-        width: 140px;
-        flex-shrink: 0;
+        width: auto;
     }
 
     .conteudo-app .acoes .acao i {
@@ -1583,21 +1684,27 @@ footer .container span.copyright {
     }
 
     .link-download {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);        
+        width: 100%;
         gap: 15px;
     }
 
     .link-download a {
-        flex-shrink: 0;
+        justify-content: space-between;
         gap: 10px;
     }
 
     .link-download a i {
-        font-size: 1.8rem;
+        font-size: 1.2rem;
     }
 
     .link-download a .descricao span {
         font-size: 0.7rem;
+    }    
+
+    .link-download a .descricao b {
+        font-size: 0.8rem;
     }
 
     .motivos .container {
@@ -1665,7 +1772,6 @@ footer .container span.copyright {
         align-items: center;
         gap: 10px;
     }
-
 
     .footer-main,
     footer .separator {

@@ -21,7 +21,6 @@ const swiperHeader = new Swiper('.swiper-banners', {
 
 const swiperPlanos = new Swiper('.swiper-planos', {
     loop: true,
-    slidesPerView: 4,
 
     breakpoints: {
         1280: {
@@ -35,7 +34,6 @@ const swiperPlanos = new Swiper('.swiper-planos', {
         },
         480: {
             slidesPerView: 1,
-            initialSlide: 1
         },
         320: {
             slidesPerView: 1,
@@ -53,7 +51,6 @@ const swiperPlanos = new Swiper('.swiper-planos', {
 
 const swiperPlanosStreaming = new Swiper('.swiper-planos-streaming', {
     loop: true,
-    slidesPerView: 4,
 
     breakpoints: {
         1280: {
@@ -67,7 +64,6 @@ const swiperPlanosStreaming = new Swiper('.swiper-planos-streaming', {
         },
         480: {
             slidesPerView: 1,
-            initialSlide: 1
         },
         320: {
             slidesPerView: 1,
@@ -103,10 +99,27 @@ closeMenuMobile.addEventListener('click', function () {
 const acaoApp = document.querySelectorAll('.acao');
 const userAgent = navigator.userAgent || window.opera;
 
-const linkApp = 
+const isAndroid = /android/gi.test(userAgent);
+const isIos = /iphone|ipad|ipod/gi.test(userAgent);
+
+console.log(isAndroid)
+console.log(isIos)
+console.log(userAgent)
+
+const linkAndroid = "https://play.google.com/store/apps/details?id=com.r3r.mundinet";
+const linkApple = "https://apps.apple.com/br/app/mundi-net-telecom/id6744907321";
+
+const linkApp = isAndroid
+    ? linkAndroid
+    : isIos
+        ? linkApple
+        : "/#download-app";
+
 
 acaoApp.forEach(acao => {
-    acao.href = ""
+
+    if(!acao.classList.contains('acao-central'))
+        acao.href = `${linkApp}`
 })
 
 // Dropdown menu cidades 
