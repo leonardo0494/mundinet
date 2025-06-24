@@ -15,8 +15,13 @@ document.addEventListener('scroll', function () {
 const swiperHeader = new Swiper('.swiper-banners', {
     loop: true,
     slidesPerView: 1,
-    autoplay: false,
-    pauseOnMouseEnter: true
+    speed: 1500,
+    autoplay: {
+        delay: 500,
+        disableOnInteraction: false
+    },
+    pauseOnMouseEnter: true,
+    effect: 'slide'
 });
 
 const swiperPlanos = new Swiper('.swiper-planos', {
@@ -102,10 +107,6 @@ const userAgent = navigator.userAgent || window.opera;
 const isAndroid = /android/gi.test(userAgent);
 const isIos = /iphone|ipad|ipod/gi.test(userAgent);
 
-console.log(isAndroid)
-console.log(isIos)
-console.log(userAgent)
-
 const linkAndroid = "https://play.google.com/store/apps/details?id=com.r3r.mundinet";
 const linkApple = "https://apps.apple.com/br/app/mundi-net-telecom/id6744907321";
 
@@ -122,6 +123,79 @@ acaoApp.forEach(acao => {
         acao.href = `${linkApp}`
 })
 
+// Setar pagina no formulario do modal
+document.querySelector("#pagina-modal").value = window.location.href;
+
+// Envio formulario de contato
+const formularioContato = document.querySelector("#formulario-contato"),
+    modalPrincipal = document.querySelector(".modal-principal"),
+    modalSucesso = document.querySelector(".modal-sucesso"),
+    btnFecharmodal = document.querySelectorAll(".close-modal"),
+    overlay = document.querySelector('.overlay'),
+    btnAbrirModal = document.querySelector('.open-modal-contato'),
+    inputsFormulario = document.querySelectorAll("#formulario-contato input");
+
+formularioContato.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const dados = Object.fromEntries(formData.entries());
+
+    await sendEmail(dados)
+        .then( () => {
+            trocarModal(modalPrincipal, modalSucesso);
+            resetarInputsFormulario(inputsFormulario);
+        });
+});
+
+btnFecharmodal.forEach(btnFechar =>
+    btnFechar.addEventListener("click", function () {
+        resetarInputsFormulario(inputsFormulario);
+        overlay.style.display = 'none';
+    })
+);
+
+btnAbrirModal.addEventListener("click", function () {
+    resetarInputsFormulario(inputsFormulario);
+    overlay.style.display = 'flex';
+});
+
+function resetarInputsFormulario(inputs) {
+    inputs.forEach(input => input.value = "");
+}
+
+function trocarModal(atual, proximo) {
+    atual.classList.add('saindo');
+    atual.classList.remove('ativo');
+
+    setTimeout(() => {
+        atual.classList.remove('saindo');
+        proximo.classList.add('ativo');
+    }, 400); 
+    
+    atual.style.display = 'none';    
+    proximo.style.display = "flex";
+}
+
+function sendEmail(dados) {
+    return new Promise(function (resolve, reject) {
+        fetch('enviar-email.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams(dados)
+        })
+            .then(response => response.text())
+            .then(result => {
+                resolve(result);
+            })
+            .catch(error => {
+                reject(error);
+            });
+    });
+}
+
 // Dropdown menu cidades 
 
 let selectCidades = document.querySelector('.cities-select'),
@@ -134,7 +208,8 @@ let selectCidades = document.querySelector('.cities-select'),
     cityMarkers = document.querySelectorAll("#city-markers li");
 
 let cidadeSelecionada = valorSelecionado.textContent;
-regiaoPlanos.textContent = `* Planos para a região de ${cidadeSelecionada}`;
+
+    regiaoPlanos.textContent = `* Planos para a região de ${cidadeSelecionada}`;
 
 inputOpcoes.forEach((input) => {
     input.addEventListener('click', event => {
@@ -148,21 +223,21 @@ inputOpcoes.forEach((input) => {
 
         if (valor == "Ibiapina") {
             if (ibiapinaSlideIndex === -1) {
-              swiperPlanos.appendSlide(`<div class="plano swiper-slide" data-slide="ibiapina">
+            swiperPlanos.appendSlide(`<div class="plano swiper-slide" data-slide="ibiapina">
                 <h2>50<span>MB</span></h2>
                 <ul>
-                  <li>Até 50 Mbps de Download</li>
-                  <li>Até 25 Mbps de Upload</li>
-                  <li>Taxa de Instalação Grátis</li>
-                  <li>Internet 100% Fibra Óptica</li>
+                <li>Até 50 Mbps de Download</li>
+                <li>Até 25 Mbps de Upload</li>
+                <li>Taxa de Instalação Grátis</li>
+                <li>Internet 100% Fibra Óptica</li>
                 </ul>
                 <div class="preco">
-                  <h4>R$ <span>55,00</span>/mês</h4>
+                <h4>R$ <span>55,00</span>/mês</h4>
                 </div>
-                <a href="#">Contrate agora</a>
-              </div>`);
-      
-              ibiapinaSlideIndex = swiperPlanos.slides.length - 1;
+                <a href="https://api.whatsapp.com/send?phone=5588997526022&text=Ol%C3%A1!%20Gostaria%20de%20mais%20informações%20sobre%20o%20plano%20de%20internet%20de%2050mb" target="_blank">Contrate agora</a>
+            </div>`);
+    
+            ibiapinaSlideIndex = swiperPlanos.slides.length - 1;
             }
             swiperPlanos.slideTo(swiperPlanos.params.initialSlide, 0);
             swiperPlanos.update();
@@ -172,7 +247,7 @@ inputOpcoes.forEach((input) => {
             if (ibiapinaSlideIndex !== -1) {
                 swiperPlanos.removeSlide(ibiapinaSlideIndex);
                 swiperPlanos.update();
-                 // Reseta o estado do slide ao remover um slide
+                // Reseta o estado do slide ao remover um slide
                 swiperPlanos.slideToLoop(0);
                 ibiapinaSlideIndex = -1;
             }
@@ -200,6 +275,7 @@ document.addEventListener('click', (event) => {
     return;
 });
 
+
 tipoInternet.addEventListener('click', () => {
     tipoInternetStreaming.classList.remove("ativo");
     tipoInternet.classList.add("ativo");
@@ -209,7 +285,6 @@ tipoInternetStreaming.addEventListener('click', () => {
     tipoInternet.classList.remove("ativo");
     tipoInternetStreaming.classList.add("ativo");
 });
-
 
 // Construção do mapa dinamico
 
@@ -301,7 +376,6 @@ cityMarkers.forEach(marker => {
         cityMarkers.forEach(item => item.classList.remove('ativo'));
         this.classList.add('ativo');
         const cidade = this.getAttribute('data-city');
-        console.log(cidade);
         showLocations(cidade);
     });
 });
