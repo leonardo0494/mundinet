@@ -545,11 +545,54 @@ ul {
     align-items: center;
     gap: 10px;
 }
+
 .banner-1 .conteudo .beneficios span > i{
     font-size: .6rem;
     border: 2px solid var(--red);
     border-radius: 50%;
     padding: .2rem;
+}
+
+.header-banner-faq {
+    height: 270px;
+    padding: 20px 0;
+    overflow: hidden;
+    background: linear-gradient(100deg, var(--dark-blue-hover), var(--dark-blue));    
+}
+
+.banner-faq {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+}
+
+.banner-faq>.imagem {
+    height: 250px;
+    background-color: greenyellow;
+}
+
+.banner-faq > .imagem > svg{
+    height: 300px;
+    position: absolute;
+    top: 20px;
+}
+
+.banner-faq .conteudo{
+    text-align: center;
+    color: var(--white);
+    line-height: 1.5;
+}
+
+.banner-faq .conteudo h1{
+    font-size: 3rem;
+}
+
+.banner-faq .conteudo h2 {
+    font-size: 1.2rem;
+    font-weight: 300;
 }
 
 .filtro-planos {
@@ -1589,6 +1632,14 @@ details[open] summary::after {
         bottom: -13px;
     }
 
+    .banner-faq {
+        justify-content: space-between;
+    }
+
+    .banner-faq .conteudo {
+        text-align: right;
+    }
+
     .planos .container{
         padding: 2rem;
     }
@@ -1674,6 +1725,32 @@ details[open] summary::after {
 
     #map {
         height: 400px;
+    }
+
+    .dados-indicacao {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .dados-indicacao button {
+        grid-column: 1 / -1;
+        justify-self: star;
+        width: 100%;
+    }
+
+    .dados-indicacao button:hover {
+        background-color: var(--dark-blue-hover);
+    }
+
+    .error {
+        border-color: var(--red) !important;
+    }
+
+    #enviar-indicacao-link {
+        display: none;
+    }
+
+    #error-message {
+        display: none;   
     }
 
     .footer-main{
@@ -1970,6 +2047,28 @@ details[open] summary::after {
         text-align: center;
     }
 
+    .header-banner-faq{
+        height: 140px;
+    }
+
+    .banner-faq {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .banner-faq>.imagem  {
+        display: none;
+    }
+
+    .banner-faq .conteudo h1 {
+        font-size: 2.5rem;
+    }
+
+    .banner-faq .conteudo h2 {
+        font-size: 1rem;
+        font-weight: 300;   
+    }
+
     .planos .container{
         gap: 0;
     }
@@ -2066,6 +2165,10 @@ details[open] summary::after {
     .motivos .container {
         flex-direction: column;
         gap: 30px;
+    }
+
+    .motivos .container .porque p {
+        text-align: justify;
     }
 
     .motivos .container .cards{

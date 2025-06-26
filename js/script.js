@@ -15,9 +15,9 @@ document.addEventListener('scroll', function () {
 const swiperHeader = new Swiper('.swiper-banners', {
     loop: true,
     slidesPerView: 1,
-    speed: 1500,
+    speed: 2000,
     autoplay: {
-        delay: 500,
+        delay: 5000,
         disableOnInteraction: false
     },
     pauseOnMouseEnter: true,
