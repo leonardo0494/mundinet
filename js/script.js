@@ -26,7 +26,8 @@ const swiperHeader = new Swiper('.swiper-banners', {
 
 const swiperPlanos = new Swiper('.swiper-planos', {
     loop: true,
-
+    spaceBetween: 30,
+    slidesPerView: 4,
     breakpoints: {
         1280: {
             slidesPerView: 4
@@ -56,7 +57,8 @@ const swiperPlanos = new Swiper('.swiper-planos', {
 
 const swiperPlanosStreaming = new Swiper('.swiper-planos-streaming', {
     loop: true,
-
+    spaceBetween: 30,
+    slidesPerView: 4,
     breakpoints: {
         1280: {
             slidesPerView: 4

@@ -156,6 +156,7 @@ ul {
     transition: heigth 0.3s ease-in-out;
     top: 55px;
     box-shadow: 0 2px 1px hsl(0, 0%, 4%);
+    z-index: 2;
 }
 
 .cities .city:nth-child(1) {
@@ -630,16 +631,8 @@ ul {
     padding: 2.5rem 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: 2.5rem;
     position: relative;
-}
-
-.planos-internet > .swiper-slide {
-    width: 250px !important;
-    /* Ajuste o valor para o tamanho que quiser */
-    max-width: 250px;
-    /* Opcional para limitar */ 
 }
 
 .slide-planos-internet,
@@ -656,16 +649,8 @@ ul {
     gap: 2.5rem;
 }
 
-.planos-internet,
-.planos-internet-streaming {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 25px;
-}
-
-.slide-planos,
-.slide-planos-internet{
+.slide-planos-internet,
+.slide-planos {
     display: none;
 }
 
@@ -2075,30 +2060,24 @@ details[open] summary::after {
 
     .slide-planos-internet,
     .slide-planos {
-        padding: 2.5rem 0;
+        padding: 2.5rem 2rem;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+    .swiper-button-prev::after,
+    .swiper-button-next::after {
+        font-size: 2rem;
     }
 
     .filtro-planos{
         flex-direction: column;
         gap: 20px;
-    }
-
-    .swiper-button-next {
-        display: none;
-    }
-    
-    .swiper-button-prev {
-        position: absolute;
-        top: unset;
-        bottom: -20px;
-        margin-top: unset;
-        display: flex;
-    }
-
-    .swiper-button-next:after,
-    .swiper-button-prev:after {
-        font-size: 1rem;
-    }
+    }    
 
     .cards-faq {
         grid-template-columns: 100%;
