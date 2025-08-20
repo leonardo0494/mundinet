@@ -101,6 +101,39 @@ closeMenuMobile.addEventListener('click', function () {
     menuMobile.classList.add('closed');
 });
 
+// Acao cards da FAQ 
+
+const cards = document.querySelectorAll(".card");
+
+cards.forEach(card => {
+  const content = card.querySelector(".card-content");
+  if (card.classList.contains("open")) {
+    content.style.maxHeight = content.scrollHeight + "px";
+  }
+});
+
+cards.forEach(card => {
+  const content = card.querySelector(".card-content");
+
+  card.addEventListener("click", () => {
+    cards.forEach(c => {
+      if (c !== card) {
+        const cContent = c.querySelector(".card-content");
+        c.classList.remove("open");
+        cContent.style.maxHeight = 0;
+      }
+    });
+
+    if (card.classList.contains("open")) {
+      card.classList.remove("open");
+      content.style.maxHeight = 0;
+    } else {
+      card.classList.add("open");
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  });
+});
+
 // links de ação do APP 
 
 const acaoApp = document.querySelectorAll('.acao');

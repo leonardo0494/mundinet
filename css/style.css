@@ -214,9 +214,9 @@ ul {
     gap: 1rem;
 }
 
-.top-header .brand svg {
+.top-header .brand img {
     fill: var(--dark-blue);
-    height: 60px;
+    height: 70px;
 }
 
 .top-header .brand span {
@@ -328,7 +328,11 @@ ul {
 }
 
 .header-banners {
-    background-color: var(--dark-blue);
+    background:
+        url("../assets/fundo_banner.png") repeat,
+        color-mix(in srgb, var(--dark-blue) 100%, transparent);
+    background-size: 900px;
+    background-blend-mode: multiply;
     padding: 2.5rem 0;
 }
 
@@ -558,7 +562,11 @@ ul {
     height: 270px;
     padding: 20px 0;
     overflow: hidden;
-    background: linear-gradient(100deg, var(--dark-blue-hover), var(--dark-blue));    
+    background:
+            url("../assets/fundo_banner.png") repeat,
+            color-mix(in srgb, var(--dark-blue) 100%, transparent);
+        background-size: 900px;
+        background-blend-mode: multiply;
 }
 
 .banner-faq {
@@ -1161,7 +1169,7 @@ footer .container span.copyright {
 
 .cards-faq{
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 100%;
     padding: 1rem 1rem 1rem 0;
     gap: 20px
 }
@@ -1173,29 +1181,55 @@ footer .container span.copyright {
     padding: 0 1rem .4rem 1rem;
 }
 
+.card:not(.open) .card-content{
+    display: none;
+}
+
 .card-title{
     display: flex;
     align-items: center;
+    position: relative;
     gap: 10px;
     font-size: 1rem;
     font-weight: 600;
-    padding: 1rem 0;
-    border-bottom: 1px solid rgba(0 ,0, 0, 0.1);
+    padding-top: 1rem;
     margin-bottom: 10px;
+}
+
+.card-title::after {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f078";
+    position: absolute;
+    right: 0;
+}
+
+.card:has(.open).card-title {
+    padding-bottom: 1rem;
+}
+
+.card.open .card-title::after {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f077";
+    position: absolute;
+    right: 0;
 }
 
 .card-title i {
     color: var(--dark-blue);
 }
 
+.card-content {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease;
+}
+
 details {
     font-size: .9rem;
     padding: .8rem 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-details:last-child{
-    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 details[open] summary{
