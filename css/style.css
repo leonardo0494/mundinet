@@ -29,6 +29,7 @@ ul {
     --light-white: #EAEAEA;
     --red: #e21243;
     --red-hover: #7b0823;
+    --red-play: #CD0127;
     --dark-blue: #0A1284;
     --dark-blue-hover: #1924b9;
     --light-grey: #F3F3F3;
@@ -38,6 +39,7 @@ ul {
     --dark-grey: #1E1E1E;
     --light-green: #29a71a;
     --dark-green: #228816;
+    --premiere-green: #338C2E;
 }
 
 .hidden{
@@ -338,7 +340,8 @@ ul {
 
 .banner-1,
 .banner-2,
-.banner-3 {
+.banner-3,
+.banner-4 {
     display: flex;
     justify-content: start;
     gap: 4rem;
@@ -558,13 +561,92 @@ ul {
     padding: .2rem;
 }
 
+.banner-4 .imagem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.banner-4 .imagem img {
+    height: 66px;
+}
+
+.banner-4 .imagem .separador {
+    width: 1px;
+    height: 40px;
+    background: white;
+}
+
+.banner-4 .imagem .streaming{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 2px;
+}
+
+.banner-4 .imagem .streaming svg {
+    height: 20px;
+}
+
+.banner-4 .imagem .streaming .by {
+    display: flex;
+    align-items: end;
+    gap: 5px;
+}
+
+.banner-4 .imagem .streaming .by span {
+    font-size: .5rem;
+    white-space: nowrap;
+}
+
+.banner-4 .imagem .streaming .by img {
+    height: 18px;
+}
+
+.banner-4 .conteudo {
+    display: flex;
+    padding: 0;
+    gap: 40px;
+}
+
+.banner-4 .conteudo img {
+    height: 320px;
+}
+
+.banner-4 .conteudo .chamada {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.banner-4 .conteudo .chamada .texto{
+    width: 480px;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    line-height: 2.5;
+}
+
+.banner-4 .conteudo .chamada .texto span{
+    background-color: var(--red-play);
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin-left: 3px;
+}
+
+.banner-4 .conteudo .chamada .texto:nth-child(2){
+    line-height: 1;
+}
+
 .header-banner-faq {
     height: 270px;
     padding: 20px 0;
     overflow: hidden;
     background:
-            url("../assets/fundo_banner.png") repeat,
-            color-mix(in srgb, var(--dark-blue) 100%, transparent);
+        url("../assets/fundo_banner.png") repeat,
+        color-mix(in srgb, var(--dark-blue) 100%, transparent);
         background-size: 900px;
         background-blend-mode: multiply;
 }
@@ -1077,13 +1159,8 @@ footer .container{
     gap: 10px;
 }
 
-.footer-main .brand .logo svg {
-    fill: var(--white);
-}
-
-.footer-main .brand .logo span {
-    font-size: 2.5rem;
-    font-weight: 700;
+.footer-main .brand .logo > img {
+    height: 100px;
 }
 
 footer .separator {
@@ -1651,6 +1728,29 @@ details[open] summary::after {
         bottom: -13px;
     }
 
+    .banner-4 .imagem {
+        gap: 10px;
+    }
+
+    .banner-4 .imagem img {
+        height: 60px;
+    }
+
+    .banner-4 .conteudo img {
+        height: 260px;
+    }
+
+    .banner-4 .conteudo .chamada {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .banner-4 .conteudo .chamada .texto{
+        width: 280px;
+        font-size: 1rem;
+    }
+
     .banner-faq {
         justify-content: space-between;
     }
@@ -1776,12 +1876,8 @@ details[open] summary::after {
         gap: 10px;
     }
 
-    .footer-main .brand .logo svg {
-        height: 30px;
-    }
-
-    .footer-main .brand .logo span {
-        font-size: 2.1rem;
+    .footer-main .brand .logo > img {
+        height: 90px;
     }
 
     .footer-main .brand .sociais li a {
@@ -2064,6 +2160,38 @@ details[open] summary::after {
     .banner-3 .conteudo a{
         width: 100%;
         text-align: center;
+    }
+
+    .banner-4 {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        padding: 10px 0;
+    }
+
+    .banner-4 .imagem {
+        gap: 0;
+    }
+
+    .banner-4 .conteudo {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .banner-4 .conteudo img {
+        height: 300px;
+    }
+
+    .banner-4 .conteudo .chamada {
+        width:  440px;
+    }
+
+    .banner-4 .conteudo .chamada .texto{
+        width:  440px;
+        font-size: .9rem;
+        line-height: 2.5;
     }
 
     .header-banner-faq{
