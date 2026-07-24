@@ -12,6 +12,8 @@ document.addEventListener('scroll', function () {
 
 // Construção dos slides do site
 
+const headerBanner = document.querySelector('.header-banners');
+
 const swiperHeader = new Swiper('.swiper-banners', {
     loop: true,
     slidesPerView: 1,
@@ -20,9 +22,24 @@ const swiperHeader = new Swiper('.swiper-banners', {
         delay: 5000,
         disableOnInteraction: false
     },
+    on: {
+        iniit() {
+            updateHeaderBackground(this);
+        },
+        slideChange() {
+            updateHeaderBackground(this);
+        }
+    },
     pauseOnMouseEnter: true,
     effect: 'slide'
 });
+
+function updateHeaderBackground(swiper) {
+    const slide = swiper.slides[swiper.activeIndex];
+    const bgImage = slide.getAttribute('data-bg');
+    headerBanner.style.backgroundImage = `url(${bgImage})`;
+}
+
 
 const swiperPlanos = new Swiper('.swiper-planos', {
     loop: true,
