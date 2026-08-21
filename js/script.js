@@ -16,6 +16,10 @@ const headerBanner = document.querySelector('.header-banners');
 
 const swiperHeader = new Swiper('.swiper-banners', {
     loop: true,
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
     slidesPerView: 1,
     speed: 2000,
     autoplay: {
